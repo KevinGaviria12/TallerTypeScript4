@@ -3,15 +3,15 @@ promesa usando Async para ello. Luego, llame a la función y trate de imprimir s
 es el resultado de la impresión? ¿un valor numérico ? ¿una promesa ? */
 
 
+// Función async que retorna el cuadrado de un número como promesa
+async function cuadradoAsync(num: number): Promise<number> {
+	return num * num;
+}
 
-
-
-
-
-
-
-
-
+// Llamada a la función y se imprime el valor de retorno
+const resultado = cuadradoAsync(5);
+console.log(resultado); // Imprime: Promise { <pending> }
+// Para obtener el valor numérico, se debe usar await o .then()
 
 
 /** Cree una función llamada “resultado” que retorne una promesa usando “return new Promise”, de tal
