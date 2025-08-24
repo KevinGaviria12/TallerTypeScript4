@@ -25,6 +25,19 @@ console.log(resultado); // Imprime: Promise { <pending> }
 manera que la promesa en su bloque de instrucciones implemente setTimeout demorandose seis
 segundos para resolverse con valor 8. Luego, llame a la función e imprima su resultado, ¿qué resultado
 obtiene? ¿una promesa?, ¿ un entero ? */
+function result() {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve(8);
+        }, 6000); // 6 segundos
+    });
+}
+const promesa = result();
+console.log(promesa); // Imprime: Promise { <pending> }
+// Para obtener el valor numérico, se debe usar await o .then()
+promesa.then((valor) => {
+    console.log(valor); // Imprime: 8
+});
 /**Cree una función llamada “cuadradoAsincrono” que llame en su bloque de instrucciones a la función
 “resultado” de tal manera que la ejecución se detenga hasta obtener el valor retornado por “resultado”,
 luego, eleve tal valor al cuadrado y este sea impreso. Use Async - Await. ¿ Qué imprimió ? ¿una
@@ -33,4 +46,17 @@ a) ¿Qué cláusula usamos para que una función retorne una promesa sin crearla
 dentro de la función ?
 b) Si necesitamos capturar el valor de una promesa, ¿ qué cláusula usamos ?
 c) ¿Cuál es la condición para poder usar la cláusula await ?
- */ 
+ */
+// Función async que espera el resultado de 'result', lo eleva al cuadrado e imprime el resultado
+function cuadradoAsincrono() {
+    return __awaiter(this, void 0, void 0, function* () {
+        const valor = yield result();
+        const cuadrado = valor * valor;
+        console.log(cuadrado); // Imprime: 64
+    });
+}
+cuadradoAsincrono();
+// Respuestas teóricas:
+// a) Usamos la cláusula 'async' para que una función retorne una promesa sin crearla explícitamente.
+// b) Usamos la cláusula 'await' para capturar el valor de una promesa.
+// c) La condición es que 'await' solo puede usarse dentro de funciones declaradas como 'async'.
